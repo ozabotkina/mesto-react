@@ -1,19 +1,36 @@
 
+import { CurrentUserContext } from './CurrentUserContext.js';
+import React from 'react';
+
+
 function Card (props) {
-  
+
+  const currentUser = React.useContext(CurrentUserContext);
+  const isOwn = props.card.owner._id === currentUser._id;
+  const cardDeleteButtonClassName = (
+    `element__trash interactive ${isOwn ? '' : 'element__trash_inactive'}`
+);
+  const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+  const cardLikeButtonClassName = (
+    `element__like interactive ${isLiked ? 'element__like_active' : ''}`
+  );; 
+
+
   const handleClick = () => {props.onCardClick(props.card)};
+  const handleLikeClick = () => {props.onCardLike(props.card)};
+  const handleDeleteClick = () => {props.onCardDelete(props.card)};
   
       return(
-          <div className="element" id={props.id}
-           onClick={handleClick.bind(this)}
+          <div className="element" id={props.card._id}
+           
            >
-          <button className="element__trash interactive" type="button"/>
-          <div className="element__image" style={{ backgroundImage: `url(${props.link})`}}/>
+          <button className={cardDeleteButtonClassName} onClick={handleDeleteClick.bind(this)} type="button"/>
+          <div className="element__image" onClick={handleClick.bind(this)} style={{ backgroundImage: `url(${props.card.link})`}}/>
           <div className="element__words">
-            <h2 className="element__title">{props.name}</h2>
+            <h2 className="element__title">{props.card.name}</h2>
             <div className="element__like-info">
-            <button className="element__like interactive" type="button"/>
-            <p className="element__like-number">{props.likes.length}</p>
+            <button className={cardLikeButtonClassName} onClick={handleLikeClick.bind(this)} type="button"/>
+            <p className="element__like-number">{props.card.likes.length}</p>
             </div>
             </div>
          </div>   

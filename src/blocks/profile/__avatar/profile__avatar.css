@@ -2,9 +2,11 @@
     border-radius: 50%;
     width: 120px;
     height: 120px;
-    object-fit: cover;
+    object-fit: contain;
    grid-row: 1;
    grid-column: 1;
    z-index: 1;
-   background-size: contain;
+   background-size: cover
+   ;
+   background-repeat: no-repeat;
 }
