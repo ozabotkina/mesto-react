@@ -1,13 +1,11 @@
+import logoPath from "../images/Vector.svg";
 
-import logoPath from '../images/Vector.svg'
-
-
-function Header(){
-    return (      
+function Header() {
+  return (
     <header className="header">
-        <img className="logo" src={logoPath} alt="лого Место" />
+      <img className="logo" src={logoPath} alt="лого Место" />
     </header>
-)
+  );
 }
 
-export default Header
+export default Header;

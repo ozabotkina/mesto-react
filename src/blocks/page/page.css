@@ -1,12 +1,11 @@
 .page {
-    background-color: #000000;
-    height:100%;
-    padding: 45px 0 60px;
+  background-color: #000000;
+  height: 100%;
+  padding: 45px 0 60px;
 }
 
-@media screen and (max-width:880px){
-.page {
+@media screen and (max-width: 880px) {
+  .page {
     padding: 28px 0 19px;
- 
-}
+  }
 }
