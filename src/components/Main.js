@@ -6,14 +6,14 @@ import pencilPath from "../images/pencil.svg";
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
   
-  const [avatarStyle, setAvatarStyle] = React.useState({zindex: "1", opacity: "1"});
+  const [isMouseOver, setIsMouseOver] = React.useState(false);
 
   function handleMouseOver() {
-    setAvatarStyle({zindex: "-1", opacity: "0.2"})
+    setIsMouseOver(true)
   };
 
   function handleMouseOut() {
-    setAvatarStyle({zindex: "1", opacity: "1"})
+    setIsMouseOver(false)
   }
 
   return (
@@ -25,8 +25,8 @@ function Main(props) {
          onMouseOut={handleMouseOut}
         >
           <div
-            className="profile__avatar"
-            style={{ backgroundImage: `url(${currentUser.avatar})`, zIndex: avatarStyle.zindex, opacity: avatarStyle.opacity}}
+            className= {isMouseOver ? "profile__avatar profile__avatar_hover" : "profile__avatar"}
+            style={{ backgroundImage: `url(${currentUser.avatar})`}}
           ></div>
           <img className="profile__edit" src= {pencilPath} />
         </div>

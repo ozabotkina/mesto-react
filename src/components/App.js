@@ -88,29 +88,21 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    if (isLiked) {
-      api
-        .deleteLike(card._id)
-        .then((newCard) => {
-          setCards((state) =>
-            state.map((c) => (c._id === card._id ? newCard : c))
-          );
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      api
-        .createLike(card._id)
-        .then((newCard) => {
-          setCards((state) =>
-            state.map((c) => (c._id === card._id ? newCard : c))
-          );
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+
+    const action = isLiked
+      ? api.deleteLike(card._id)
+      : api.createLike(card._id);
+
+    action
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      }); 
+    
   }
 
   function handleCardDelete(card) {
@@ -129,8 +121,6 @@ function App() {
       .addNewCard(link, name)
       .then((newCard) => {
         setCards([newCard, ...cards]);
-      })
-      .then(() => {
         closeAllPopups();
       })
       .catch((err) => {
@@ -163,19 +153,19 @@ function App() {
 
         <EditProfilePopup
           isOpen={isEditProfileOpen}
-          onClose={() => closeAllPopups()}
+          onClose={closeAllPopups}
           onUpdateUser={handleUserUpdate}
         />
 
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
-          onClose={() => closeAllPopups()}
+          onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
         />
 
         <AddPlacePopup
           isOpen={isAddCardOpen}
-          onClose={() => closeAllPopups()}
+          onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
         />
 

@@ -45,6 +45,7 @@
 @import url(./blocks/popup/__container/_delete-card/popup__container_delete-card.css);
 @import url(./blocks/profile/__edit/profile__edit.css);
 @import url(./blocks/profile/__avatar-wrap/profile__avatar-wrap.css);
+@import url(./blocks/profile/__avatar/profile__avatar_hover.css);
 
 .page {
   background-color: #000000;
