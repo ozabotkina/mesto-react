@@ -2,33 +2,39 @@ import Card from "../components/Card.js";
 import React from "react";
 import { CurrentUserContext } from "../context/CurrentUserContext.js";
 import pencilPath from "../images/pencil.svg";
+import { withRouter } from "react-router-dom";
 
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
-  
+
   const [isMouseOver, setIsMouseOver] = React.useState(false);
 
   function handleMouseOver() {
-    setIsMouseOver(true)
-  };
+    setIsMouseOver(true);
+  }
 
   function handleMouseOut() {
-    setIsMouseOver(false)
+    setIsMouseOver(false);
   }
 
   return (
     <main className="content">
       <section className="profile">
-        <div className="profile__avatar-wrap"
-         onClick={props.onEditAvatar}
-         onMouseOver={handleMouseOver}
-         onMouseOut={handleMouseOut}
+        <div
+          className="profile__avatar-wrap"
+          onClick={props.onEditAvatar}
+          onMouseOver={handleMouseOver}
+          onMouseOut={handleMouseOut}
         >
           <div
-            className= {isMouseOver ? "profile__avatar profile__avatar_hover" : "profile__avatar"}
-            style={{ backgroundImage: `url(${currentUser.avatar})`}}
+            className={
+              isMouseOver
+                ? "profile__avatar profile__avatar_hover"
+                : "profile__avatar"
+            }
+            style={{ backgroundImage: `url(${currentUser.avatar})` }}
           ></div>
-          <img className="profile__edit" src= {pencilPath} />
+          <img className="profile__edit" src={pencilPath} />
         </div>
         <div className="profile__info">
           <div className="profile__name-wrap">
@@ -63,4 +69,4 @@ function Main(props) {
   );
 }
 
-export default Main;
+export default withRouter(Main);
